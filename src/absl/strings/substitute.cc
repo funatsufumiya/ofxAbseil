@@ -86,7 +86,7 @@ void SubstituteAndAppendArray(
   // Build the string.
   size_t original_size = output->size();
   ABSL_INTERNAL_CHECK(
-      size <= std::numeric_limits<size_t>::max() - original_size,
+      size <= (std::numeric_limits<size_t>::max)() - original_size,
       "size_t overflow");
   strings_internal::STLStringResizeUninitializedAmortized(output,
                                                           original_size + size);

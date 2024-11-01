@@ -25,7 +25,7 @@ static const size_t kUnknownFrameSize = 0;
 // Stack end to use when we don't know the actual stack end
 // (effectively just the end of address space).
 constexpr uintptr_t kUnknownStackEnd =
-    std::numeric_limits<size_t>::max() - sizeof(void *);
+    (std::numeric_limits<size_t>::max)() - sizeof(void *);
 
 #if defined(__linux__)
 // Returns the address of the VDSO __kernel_rt_sigreturn function, if present.

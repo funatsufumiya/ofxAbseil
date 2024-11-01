@@ -130,7 +130,7 @@ static int UnwindImpl(void **result, int *sizes, int max_depth, int skip_count,
   std::pair<size_t, size_t> stack = {
       // assume that the first page is not the stack.
       static_cast<size_t>(sysconf(_SC_PAGESIZE)),
-      std::numeric_limits<size_t>::max() - sizeof(void *)
+      (std::numeric_limits<size_t>::max)() - sizeof(void *)
   };
 
   int n = 0;

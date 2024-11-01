@@ -396,7 +396,7 @@ inline size_t CEscapedLength(absl::string_view src) {
   // The maximum value of kCEscapedLen[x] is 4, so we can escape any string of
   // length size_t_max/4 without checking for overflow.
   size_t unchecked_limit =
-      std::min<size_t>(src.size(), std::numeric_limits<size_t>::max() / 4);
+      std::min<size_t>(src.size(), (std::numeric_limits<size_t>::max)() / 4);
   size_t i = 0;
   while (i < unchecked_limit) {
     // Common case: No need to check for overflow.
@@ -406,7 +406,7 @@ inline size_t CEscapedLength(absl::string_view src) {
     // Beyond unchecked_limit we need to check for overflow before adding.
     size_t char_len = kCEscapedLen[static_cast<unsigned char>(src[i++])];
     ABSL_INTERNAL_CHECK(
-        escaped_len <= std::numeric_limits<size_t>::max() - char_len,
+        escaped_len <= (std::numeric_limits<size_t>::max)() - char_len,
         "escaped_len overflow");
     escaped_len += char_len;
   }
@@ -423,7 +423,7 @@ void CEscapeAndAppendInternal(absl::string_view src,
 
   size_t cur_dest_len = dest->size();
   ABSL_INTERNAL_CHECK(
-      cur_dest_len <= std::numeric_limits<size_t>::max() - escaped_len,
+      cur_dest_len <= (std::numeric_limits<size_t>::max)() - escaped_len,
       "std::string size overflow");
   strings_internal::STLStringResizeUninitialized(dest,
                                                  cur_dest_len + escaped_len);

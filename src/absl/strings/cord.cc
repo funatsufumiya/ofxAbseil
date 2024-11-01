@@ -552,7 +552,7 @@ static CordBuffer CreateAppendBuffer(InlineData& data, size_t block_size,
                                      size_t capacity) {
   // Watch out for overflow, people can ask for size_t::max().
   const size_t size = data.inline_size();
-  const size_t max_capacity = std::numeric_limits<size_t>::max() - size;
+  const size_t max_capacity = (std::numeric_limits<size_t>::max)() - size;
   capacity = (std::min)(max_capacity, capacity) + size;
   CordBuffer buffer =
       block_size ? CordBuffer::CreateWithCustomLimit(block_size, capacity)

@@ -38,7 +38,7 @@ size_t CalculateBase64EscapedLenInternal(size_t input_len, bool do_padding) {
   // divisible by three, we pad as appropriate.
   //
   // Base64 encodes each three bytes of input into four bytes of output.
-  constexpr size_t kMaxSize = (std::numeric_limits<size_t>::max() - 1) / 4 * 3;
+  constexpr size_t kMaxSize = ((std::numeric_limits<size_t>::max)() - 1) / 4 * 3;
   ABSL_INTERNAL_CHECK(input_len <= kMaxSize,
                       "CalculateBase64EscapedLenInternal() overflow");
   size_t len = (input_len / 3) * 4;

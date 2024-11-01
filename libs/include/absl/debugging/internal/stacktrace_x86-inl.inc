@@ -115,7 +115,7 @@ static const int kMaxFrameBytes = 100000;
 // Stack end to use when we don't know the actual stack end
 // (effectively just the end of address space).
 constexpr uintptr_t kUnknownStackEnd =
-    std::numeric_limits<size_t>::max() - sizeof(void *);
+    (std::numeric_limits<size_t>::max)() - sizeof(void *);
 
 // Returns the stack frame pointer from signal context, 0 if unknown.
 // vuc is a ucontext_t *.  We use void* to avoid the use
