@@ -11,7 +11,7 @@
 
 ## Usage
 
-see [example](example)
+See [example](example). (NOTE: Please use `projectGenerator` before run it)
 
 ```cpp
 #include "absl/strings/str_join.h"
