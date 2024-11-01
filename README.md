@@ -24,7 +24,7 @@ void ofApp::setup(){
     // test of absl str_join
 
     std::vector<std::string> v = {"foo", "bar", "baz"};
-      std::string s = absl::StrJoin(v, "-");
+    std::string s = absl::StrJoin(v, "-");
 
     ofLogNotice("ofApp") << "absl::StrJoin(v, \"-\") = " << s;
 
