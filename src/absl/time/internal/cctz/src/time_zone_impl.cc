@@ -12,7 +12,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include "time_zone_impl.h"
+// #include "time_zone_impl.h"
+#include "absl/time/internal/cctz/src/time_zone_impl.h"
 
 #include <deque>
 #include <memory>
@@ -22,7 +23,8 @@
 #include <utility>
 
 #include "absl/base/config.h"
-#include "time_zone_fixed.h"
+// #include "time_zone_fixed.h"
+#include "absl/time/internal/cctz/src/time_zone_fixed.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN
