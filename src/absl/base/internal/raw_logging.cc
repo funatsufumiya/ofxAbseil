@@ -254,6 +254,8 @@ void AsyncSignalSafeWriteError(const char* s, size_t len) {
 #endif
 }
 
+#ifdef _WIN32
+#else
 void RawLog(absl::LogSeverity severity, const char* file, int line,
             const char* format, ...) {
   va_list ap;
@@ -261,6 +263,7 @@ void RawLog(absl::LogSeverity severity, const char* file, int line,
   RawLogVA(severity, file, line, format, ap);
   va_end(ap);
 }
+#endif
 
 bool RawLoggingFullySupported() {
 #ifdef ABSL_LOW_LEVEL_WRITE_SUPPORTED

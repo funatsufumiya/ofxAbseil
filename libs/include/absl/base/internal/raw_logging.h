@@ -123,12 +123,15 @@ namespace absl {
 ABSL_NAMESPACE_BEGIN
 namespace raw_log_internal {
 
+#ifdef _WIN32
+#else
 // Helper function to implement ABSL_RAW_LOG
 // Logs format... at "severity" level, reporting it
 // as called from file:line.
 // This does not allocate memory or acquire locks.
 void RawLog(absl::LogSeverity severity, const char* file, int line,
             const char* format, ...) ABSL_PRINTF_ATTRIBUTE(4, 5);
+#endif
 
 // Writes the provided buffer directly to stderr, in a signal-safe, low-level
 // manner.  Preserves errno.
