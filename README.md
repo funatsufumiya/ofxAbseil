@@ -17,6 +17,8 @@ see [example](example)
 #include "absl/strings/str_join.h"
 #include "absl/types/optional.h"
 #include "absl/hash/hash.h"
+#include "absl/container/flat_hash_map.h"
+#include "absl/types/any.h"
 
 void ofApp::setup(){
     ofLogToConsole();
@@ -24,7 +26,7 @@ void ofApp::setup(){
     // test of absl str_join
 
     std::vector<std::string> v = {"foo", "bar", "baz"};
-    std::string s = absl::StrJoin(v, "-");
+      std::string s = absl::StrJoin(v, "-");
 
     ofLogNotice("ofApp") << "absl::StrJoin(v, \"-\") = " << s;
 
@@ -43,6 +45,15 @@ void ofApp::setup(){
     size_t hash = hasher(str);
 
     ofLogNotice("ofApp") << "absl::Hash<std::string>: hash = " << hash;
+
+    // test of hash map of any type
+
+    absl::flat_hash_map<std::string, absl::any> map;
+    map["int"] = 42;
+    map["string"] = std::string("hello");
+
+    ofLogNotice("ofApp") << "absl::flat_hash_map<std::string, absl::any>: map[\"int\"] = " << absl::any_cast<int>(map["int"]);
+    ofLogNotice("ofApp") << "absl::flat_hash_map<std::string, absl::any>: map[\"string\"] = " << absl::any_cast<std::string>(map["string"]);
 }
 
 // Result:
@@ -50,6 +61,8 @@ void ofApp::setup(){
 // [notice ] ofApp: absl::optional: o1 = 42
 // [notice ] ofApp: absl::optional: o2 = 0
 // [notice ] ofApp: absl::Hash<std::string>: hash = 8734633936850012531
+// [notice ] ofApp: absl::flat_hash_map<std::string, absl::any>: map["int"] = 42
+// [notice ] ofApp: absl::flat_hash_map<std::string, absl::any>: map["string"] = hello
 ```
 
 ## Build notes
