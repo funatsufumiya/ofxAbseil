@@ -81,7 +81,7 @@ namespace {
 using time_internal::kTicksPerNanosecond;
 using time_internal::kTicksPerSecond;
 
-constexpr int64_t kint64max = std::numeric_limits<int64_t>::max();
+constexpr int64_t kint64max = (std::numeric_limits<int64_t>::max)();
 constexpr int64_t kint64min = std::numeric_limits<int64_t>::min();
 
 // Can't use std::isinfinite() because it doesn't exist on windows.

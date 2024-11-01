@@ -60,9 +60,9 @@ int64_t ExponentialBiased::GetSkipCount(int64_t mean) {
   // not likely to come up. For example, with a mean of 1e18, the probability of
   // hitting this condition is about 1/1000. For a mean of 1e17, standard
   // calculators claim that this event won't happen.
-  if (interval > static_cast<double>(std::numeric_limits<int64_t>::max() / 2)) {
+  if (interval > static_cast<double>((std::numeric_limits<int64_t>::max)() / 2)) {
     // Assume huge values are bias neutral, retain bias for next call.
-    return std::numeric_limits<int64_t>::max() / 2;
+    return (std::numeric_limits<int64_t>::max)() / 2;
   }
   double value = std::rint(interval);
   bias_ = interval - value;

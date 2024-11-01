@@ -371,7 +371,7 @@ ABSL_ATTRIBUTE_CONST_FUNCTION inline Duration operator-(Duration lhs,
 // Example:
 //
 //   constexpr absl::Duration a =
-//       absl::Seconds(std::numeric_limits<int64_t>::max());  // big
+//       absl::Seconds((std::numeric_limits<int64_t>::max)());  // big
 //   constexpr absl::Duration b = absl::Nanoseconds(1);       // small
 //
 //   absl::Duration rem = a % b;
@@ -379,7 +379,7 @@ ABSL_ATTRIBUTE_CONST_FUNCTION inline Duration operator-(Duration lhs,
 //
 //   // Here, q would overflow int64_t, so rem accounts for the difference.
 //   int64_t q = absl::IDivDuration(a, b, &rem);
-//   // q == std::numeric_limits<int64_t>::max(), rem == a - b * q
+//   // q == (std::numeric_limits<int64_t>::max)(), rem == a - b * q
 int64_t IDivDuration(Duration num, Duration den, Duration* rem);
 
 // FDivDuration()

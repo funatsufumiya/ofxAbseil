@@ -139,8 +139,8 @@ HashtablezInfo* SampleSlow(SamplingState& next_sample,
 
 #if !defined(ABSL_INTERNAL_HASHTABLEZ_SAMPLE)
   next_sample = {
-      std::numeric_limits<int64_t>::max(),
-      std::numeric_limits<int64_t>::max(),
+      (std::numeric_limits<int64_t>::max)(),
+      (std::numeric_limits<int64_t>::max)(),
   };
   return nullptr;
 #else

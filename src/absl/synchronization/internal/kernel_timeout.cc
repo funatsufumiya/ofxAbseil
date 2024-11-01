@@ -184,7 +184,7 @@ KernelTimeout::DWord KernelTimeout::InMillisecondsFromNow() const {
 
   constexpr uint64_t kNanosInMillis = uint64_t{1'000'000};
   constexpr uint64_t kMaxValueNanos =
-      std::numeric_limits<int64_t>::max() - kNanosInMillis + 1;
+      (std::numeric_limits<int64_t>::max)() - kNanosInMillis + 1;
 
   uint64_t ns_from_now = static_cast<uint64_t>(InNanosecondsFromNow());
   if (ns_from_now >= kMaxValueNanos) {

@@ -262,7 +262,7 @@ struct TimeTscPair {
 // latency.  This approach is used to minimize the probability that
 // our thread was preempted between clock reads.
 static TimeTscPair GetTimeTscPair() {
-  int64_t best_latency = std::numeric_limits<int64_t>::max();
+  int64_t best_latency = (std::numeric_limits<int64_t>::max)();
   TimeTscPair best;
   for (int i = 0; i < 10; ++i) {
     int64_t t0 = ReadMonotonicClockNanos();

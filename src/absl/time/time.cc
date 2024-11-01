@@ -69,7 +69,7 @@ inline int64_t FloorToUnit(absl::Duration d, absl::Duration unit) {
 ABSL_INTERNAL_DISABLE_DEPRECATED_DECLARATION_WARNING
 inline absl::Time::Breakdown InfiniteFutureBreakdown() {
   absl::Time::Breakdown bd;
-  bd.year = std::numeric_limits<int64_t>::max();
+  bd.year = (std::numeric_limits<int64_t>::max)();
   bd.month = 12;
   bd.day = 31;
   bd.hour = 23;
