@@ -67,6 +67,9 @@
 #ifndef ABSL_BASE_OPTIONS_H_
 #define ABSL_BASE_OPTIONS_H_
 
+#define ABSL_BUILD_DLL 0
+#define ABSL_CONSUME_DLL 0
+
 // -----------------------------------------------------------------------------
 // Type Compatibility Options
 // -----------------------------------------------------------------------------
@@ -95,7 +98,6 @@
 // absl::any is a typedef of std::any, use the feature macro ABSL_USES_STD_ANY.
 
 #define ABSL_OPTION_USE_STD_ANY 0
-
 
 // ABSL_OPTION_USE_STD_OPTIONAL
 //
