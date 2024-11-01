@@ -263,9 +263,15 @@ bool RawLoggingFullySupported() {
 
 // if win
 #ifdef _WIN32
+// ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL
+//     absl::base_internal::AtomicHook<InternalLogFunction>
+//         internal_log_function = DefaultInternalLog;
+
+//         fix: 重大度レベル	コード	説明	プロジェクト	ファイル	行	抑制状態	詳細
+// エラー	C2440	'初期化中': 'void (__cdecl *)(absl::lts_20240722::LogSeverity,const char *,int,const std::string &)' から 'absl::lts_20240722::base_internal::AtomicHook<absl::lts_20240722::raw_log_internal::InternalLogFunction>' に変換できません。	example	C:\Users\fu\lab\of_v0.12.0_vs_release\addons\ofxAbseil\src\absl\base\internal\raw_logging.cc	268	
 ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL
     absl::base_internal::AtomicHook<InternalLogFunction>
-        internal_log_function = DefaultInternalLog;
+        internal_log_function;
 #else
 ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL
     absl::base_internal::AtomicHook<InternalLogFunction>
