@@ -254,6 +254,7 @@ void AsyncSignalSafeWriteError(const char* s, size_t len) {
 #endif
 }
 
+// workaround for windows
 #ifdef _WIN32
 #else
 void RawLog(absl::LogSeverity severity, const char* file, int line,
@@ -273,7 +274,7 @@ bool RawLoggingFullySupported() {
 #endif  // !ABSL_LOW_LEVEL_WRITE_SUPPORTED
 }
 
-// if win
+// workaround for windows
 #ifdef _WIN32
 // ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL
 //     absl::base_internal::AtomicHook<InternalLogFunction>

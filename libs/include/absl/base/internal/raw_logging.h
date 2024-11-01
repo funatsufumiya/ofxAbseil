@@ -41,6 +41,10 @@
 // This will print an almost standard log line like this to stderr only:
 //   E0821 211317 file.cc:123] RAW: Failed foo with 22: bad_file
 
+#ifdef _WIN32
+// workaround for windows
+#define ABSL_RAW_LOG(severity, ...) 
+#else
 #define ABSL_RAW_LOG(severity, ...)                                            \
   do {                                                                         \
     constexpr const char* absl_raw_log_internal_basename =                     \
@@ -50,6 +54,7 @@
                                      __VA_ARGS__);                             \
     ABSL_RAW_LOG_INTERNAL_MAYBE_UNREACHABLE_##severity;                        \
   } while (0)
+#endif
 
 // Similar to CHECK(condition) << message, but for low-level modules:
 // we use only ABSL_RAW_LOG that does not allocate memory.
