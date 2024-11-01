@@ -62,10 +62,10 @@ common:
 	# ADDON_LIBS_EXCLUDE =
 	
 linux64:
-	ADDON_INCLUDES += libs/include
+	ADDON_INCLUDES = libs/include
 	
 linux:
-	ADDON_INCLUDES += libs/include
+	ADDON_INCLUDES = libs/include
 
 linuxarmv6l:
 	#ADDON_CFLAGS += -DOFXIMGUI_DEBUG
