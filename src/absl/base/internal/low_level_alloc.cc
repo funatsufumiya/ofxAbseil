@@ -328,7 +328,7 @@ size_t GetPageSize() {
 #ifdef _WIN32
   SYSTEM_INFO system_info;
   GetSystemInfo(&system_info);
-  return std::max(system_info.dwPageSize, system_info.dwAllocationGranularity);
+  return (std::max)(system_info.dwPageSize, system_info.dwAllocationGranularity);
 #elif defined(__wasm__) || defined(__asmjs__) || defined(__hexagon__)
   return getpagesize();
 #else
