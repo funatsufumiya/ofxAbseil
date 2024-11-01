@@ -61,7 +61,7 @@ inline int64_t FloorToUnit(absl::Duration d, absl::Duration unit) {
   absl::Duration rem;
   int64_t q = absl::IDivDuration(d, unit, &rem);
   return (q > 0 || rem >= ZeroDuration() ||
-          q == std::numeric_limits<int64_t>::min())
+          q == (std::numeric_limits<int64_t>::min)())
              ? q
              : q - 1;
 }
@@ -86,7 +86,7 @@ inline absl::Time::Breakdown InfiniteFutureBreakdown() {
 
 inline absl::Time::Breakdown InfinitePastBreakdown() {
   Time::Breakdown bd;
-  bd.year = std::numeric_limits<int64_t>::min();
+  bd.year = (std::numeric_limits<int64_t>::min)();
   bd.month = 1;
   bd.day = 1;
   bd.hour = 0;
