@@ -296,8 +296,8 @@ double BetaIncompleteInvImpl(const double p, const double q, const double beta,
   // Solve for x using a modified newton-raphson method using the function
   // BetaIncomplete.
   {
-    value = std::max(value, kErr);
-    value = std::min(value, 1.0 - kErr);
+    value = (std::max)(value, kErr);
+    value = (std::min)(value, 1.0 - kErr);
 
     const double r = 1.0 - p;
     const double t = 1.0 - q;
@@ -320,7 +320,7 @@ double BetaIncompleteInvImpl(const double p, const double q, const double beta,
       y = (y - alpha) *
           std::exp(beta + r * std::log(value) + t * std::log(1.0 - value));
       if (y * yprev <= 0) {
-        prev = std::max(sq, std::numeric_limits<double>::min());
+        prev = (std::max)(sq, std::numeric_limits<double>::min());
       }
       double g = 1.0;
       for (;;) {

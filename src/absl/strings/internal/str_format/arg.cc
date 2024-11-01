@@ -264,7 +264,7 @@ bool ConvertIntImplInnerSlow(const IntDigits &as_digits,
     //   force the first digit of the result to be zero."
     if (formatted.empty() || *formatted.begin() != '0') {
       size_t needed = formatted.size() + 1;
-      precision = std::max(precision, needed);
+      precision = (std::max)(precision, needed);
     }
   }
 

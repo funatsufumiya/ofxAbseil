@@ -668,7 +668,7 @@ struct BestHints {
 // Return the list of flags with the smallest Damerau-Levenshtein distance to
 // the given flag.
 std::vector<std::string> GetMisspellingHints(const absl::string_view flag) {
-  const size_t maxCutoff = std::min(flag.size() / 2 + 1, kMaxDistance);
+  const size_t maxCutoff = (std::min)(flag.size() / 2 + 1, kMaxDistance);
   auto undefok = absl::GetFlag(FLAGS_undefok);
   BestHints best_hints(static_cast<uint8_t>(maxCutoff));
   flags_internal::ForEachFlag([&](const CommandLineFlag& f) {

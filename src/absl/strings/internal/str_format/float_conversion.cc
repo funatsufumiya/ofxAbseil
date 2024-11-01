@@ -731,7 +731,7 @@ Int MaskUpToNibbleInclusive(size_t nibble_index) {
   static const Int ones = ~Int{0};
   ++nibble_index;
   return ones >> static_cast<int>(
-                     4 * (std::max(kNumNibbles, nibble_index) - nibble_index));
+                     4 * ((std::max)(kNumNibbles, nibble_index) - nibble_index));
 }
 
 // Return a mask with 1's below the given nibble.
@@ -823,7 +823,7 @@ void FormatARound(bool precision_specified, const FormatState &state,
   // Index of the last nibble that we could display given precision.
   size_t final_nibble_displayed =
       precision_specified
-          ? (std::max(kTotalNibbles, state.precision) - state.precision)
+          ? ((std::max)(kTotalNibbles, state.precision) - state.precision)
           : 0;
   if (HexFloatNeedsRoundUp(*mantissa, final_nibble_displayed, *leading)) {
     // Need to round up.
@@ -1380,7 +1380,7 @@ bool FloatToSink(const Float v, const FormatConversionSpecImpl &conv,
         &buffer);
   } else if (c == FormatConversionCharInternal::g ||
              c == FormatConversionCharInternal::G) {
-    precision = std::max(precision, size_t{1}) - 1;
+    precision = (std::max)(precision, size_t{1}) - 1;
     if (!FloatToBuffer<FormatStyle::Precision>(decomposed, precision, &buffer,
                                                &exp)) {
       return FallbackToSnprintf(v, conv, sink);

@@ -337,7 +337,7 @@ int NormalizedShiftSize(int mantissa_width, int binary_exponent) {
       mantissa_width - FloatTraits<FloatType>::kTargetMantissaBits;
   const int minimum_shift =
       FloatTraits<FloatType>::kMinNormalExponent - binary_exponent;
-  return std::max(normal_shift, minimum_shift);
+  return (std::max)(normal_shift, minimum_shift);
 }
 
 // Right shifts a uint128 so that it has the requested bit width.  (The

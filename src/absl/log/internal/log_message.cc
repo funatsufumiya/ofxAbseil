@@ -316,7 +316,7 @@ LogMessage& LogMessage::WithVerbosity(int verbose_level) {
   if (verbose_level == absl::LogEntry::kNoVerbosityLevel) {
     data_->entry.verbose_level_ = absl::LogEntry::kNoVerbosityLevel;
   } else {
-    data_->entry.verbose_level_ = std::max(0, verbose_level);
+    data_->entry.verbose_level_ = (std::max)(0, verbose_level);
   }
   return *this;
 }

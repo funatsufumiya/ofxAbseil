@@ -163,9 +163,9 @@ const MutexGlobals& GetMutexGlobals() {
       globals.mutex_sleep_spins[GENTLE] = 0;
       globals.mutex_sleep_time = MeasureTimeToYield() * 5;
       globals.mutex_sleep_time =
-          std::min(globals.mutex_sleep_time, absl::Milliseconds(1));
+          (std::min)(globals.mutex_sleep_time, absl::Milliseconds(1));
       globals.mutex_sleep_time =
-          std::max(globals.mutex_sleep_time, absl::Microseconds(10));
+          (std::max)(globals.mutex_sleep_time, absl::Microseconds(10));
     }
   });
   return globals;

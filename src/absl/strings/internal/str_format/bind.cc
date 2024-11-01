@@ -84,7 +84,7 @@ inline bool ArgContext::Bind(const UnboundConversion* unbound,
         // positive field width."
         force_left = true;
         // Make sure we don't overflow the width when negating it.
-        width = -std::max(width, -std::numeric_limits<int>::max());
+        width = -(std::max)(width, -std::numeric_limits<int>::max());
       }
     }
 
