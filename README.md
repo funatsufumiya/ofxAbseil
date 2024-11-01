@@ -13,6 +13,45 @@
 
 see [example](example)
 
+```cpp
+#include "absl/strings/str_join.h"
+#include "absl/types/optional.h"
+#include "absl/hash/hash.h"
+
+void ofApp::setup(){
+	ofLogToConsole();
+
+	// test of absl str_join
+
+	std::vector<std::string> v = {"foo", "bar", "baz"};
+  	std::string s = absl::StrJoin(v, "-");
+
+	ofLogNotice("ofApp") << "absl::StrJoin(v, \"-\") = " << s;
+
+	// test of absl optional
+
+	absl::optional<int> o1 = 42;
+	absl::optional<int> o2 = absl::nullopt;
+	
+	ofLogNotice("ofApp") << "absl::optional: o1 = " << o1.value_or(0);
+	ofLogNotice("ofApp") << "absl::optional: o2 = " << o2.value_or(0);
+    
+    // test of absl hash
+    
+    absl::Hash<std::string> hasher;
+	std::string str = "hello";
+	size_t hash = hasher(str);
+
+	ofLogNotice("ofApp") << "absl::Hash<std::string>: hash = " << hash;
+}
+
+// Result:
+// [notice ] ofApp: absl::StrJoin(v, "-") = foo-bar-baz
+// [notice ] ofApp: absl::optional: o1 = 42
+// [notice ] ofApp: absl::optional: o2 = 0
+// [notice ] ofApp: absl::Hash<std::string>: hash =
+```
+
 ## Build notes
 
 - `*_test.cc`, `*_benchmark.cc`, and related files are not included in this addon.
