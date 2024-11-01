@@ -195,10 +195,15 @@ using AbortHook = void (*)(const char* file, int line, const char* buf_start,
 using InternalLogFunction = void (*)(absl::LogSeverity severity,
                                      const char* file, int line,
                                      const std::string& message);
-
+#ifdef _WIN32
+ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL base_internal::AtomicHook<
+    InternalLogFunction>
+    internal_log_function;
+#else
 ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL extern base_internal::AtomicHook<
     InternalLogFunction>
     internal_log_function;
+#endif
 
 // Registers hooks of the above types.  Only a single hook of each type may be
 // registered.  It is an error to call these functions multiple times with
