@@ -261,9 +261,16 @@ bool RawLoggingFullySupported() {
 #endif  // !ABSL_LOW_LEVEL_WRITE_SUPPORTED
 }
 
+// if win
+#ifdef _WIN32
+ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL
+    absl::base_internal::AtomicHook<InternalLogFunction>
+        internal_log_function = DefaultInternalLog;
+#else
 ABSL_INTERNAL_ATOMIC_HOOK_ATTRIBUTES ABSL_DLL
     absl::base_internal::AtomicHook<InternalLogFunction>
         internal_log_function(DefaultInternalLog);
+#endif
 
 void RegisterLogFilterAndPrefixHook(LogFilterAndPrefixHook func) {
   log_filter_and_prefix_hook.Store(func);
