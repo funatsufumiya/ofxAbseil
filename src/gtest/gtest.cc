@@ -1522,7 +1522,7 @@ std::string CreateUnifiedDiff(const std::vector<std::string>& left,
     }
 
     // Find the first line to include in the hunk.
-    const size_t prefix_context = std::min(l_i, context);
+    const size_t prefix_context = (std::min)(l_i, context);
     Hunk hunk(l_i - prefix_context + 1, r_i - prefix_context + 1);
     for (size_t i = prefix_context; i > 0; --i) {
       hunk.PushLine(' ', left[l_i - i].c_str());
@@ -1683,7 +1683,7 @@ AssertionResult DoubleNearPredFormat(const char* expr1, const char* expr2,
   if (diff <= abs_error) return AssertionSuccess();
 
   // Find the value which is closest to zero.
-  const double min_abs = std::min(fabs(val1), fabs(val2));
+  const double min_abs = (std::min)(fabs(val1), fabs(val2));
   // Find the distance to the next double from that value.
   const double epsilon =
       nextafter(min_abs, std::numeric_limits<double>::infinity()) - min_abs;
@@ -5038,7 +5038,7 @@ std::string OsStackTraceGetter::CurrentStackTrace(int max_depth, int skip_count)
     return result;
   }
 
-  max_depth = std::min(max_depth, kMaxStackTraceDepth);
+  max_depth = (std::min)(max_depth, kMaxStackTraceDepth);
 
   std::vector<void*> raw_stack(max_depth);
   // Skips the frames requested by the caller, plus this function.

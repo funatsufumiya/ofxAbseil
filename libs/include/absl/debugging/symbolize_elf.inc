@@ -473,7 +473,7 @@ ssize_t CachingFile::ReadFromOffset(void *buf, size_t count, off_t offset) {
     if (offset >= cache_start_ && offset < cache_limit_) {
       const char *hit_start = &cache_[offset - cache_start_];
       const size_t n =
-          std::min(count - read, static_cast<size_t>(cache_limit_ - offset));
+          (std::min)(count - read, static_cast<size_t>(cache_limit_ - offset));
       memcpy(dst, hit_start, n);
       dst += n;
       read += static_cast<size_t>(n);
@@ -772,7 +772,7 @@ static ABSL_ATTRIBUTE_NOINLINE FindSymbolResult FindSymbol(
         static_cast<off_t>(symtab->sh_offset + i * symtab->sh_entsize);
     const size_t num_remaining_symbols = num_symbols - i;
     const size_t entries_in_chunk =
-        std::min(num_remaining_symbols, buf_entries);
+        (std::min)(num_remaining_symbols, buf_entries);
     const size_t bytes_in_chunk = entries_in_chunk * sizeof(buf[0]);
     const ssize_t len = file->ReadFromOffset(buf, bytes_in_chunk, offset);
     SAFE_ASSERT(len >= 0);
@@ -1703,7 +1703,7 @@ bool Symbolize(const void *pc, char *out, int out_size) {
       // trailing ellipsis.
       static constexpr char kEllipsis[] = "...";
       size_t ellipsis_size =
-          std::min(strlen(kEllipsis), static_cast<size_t>(out_size) - 1);
+          (std::min)(strlen(kEllipsis), static_cast<size_t>(out_size) - 1);
       memcpy(out + static_cast<size_t>(out_size) - ellipsis_size - 1, kEllipsis,
              ellipsis_size);
       out[static_cast<size_t>(out_size) - 1] = '\0';

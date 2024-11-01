@@ -176,7 +176,7 @@ struct timespec KernelTimeout::MakeClockAbsoluteTimespec(clockid_t c) const {
 #endif
 
 KernelTimeout::DWord KernelTimeout::InMillisecondsFromNow() const {
-  constexpr DWord kInfinite = std::numeric_limits<DWord>::max();
+  constexpr DWord kInfinite = (std::numeric_limits<DWord>::max)();
 
   if (!has_timeout()) {
     return kInfinite;
@@ -202,7 +202,7 @@ KernelTimeout::DWord KernelTimeout::InMillisecondsFromNow() const {
 std::chrono::time_point<std::chrono::system_clock>
 KernelTimeout::ToChronoTimePoint() const {
   if (!has_timeout()) {
-    return std::chrono::time_point<std::chrono::system_clock>::max();
+    return (std::chrono::time_point<std::chrono::system_clock>::max)();
   }
 
   // The cast to std::microseconds is because (on some platforms) the
@@ -215,7 +215,7 @@ KernelTimeout::ToChronoTimePoint() const {
 
 std::chrono::nanoseconds KernelTimeout::ToChronoDuration() const {
   if (!has_timeout()) {
-    return std::chrono::nanoseconds::max();
+    return (std::chrono::nanoseconds::max)();
   }
   return std::chrono::nanoseconds(InNanosecondsFromNow());
 }

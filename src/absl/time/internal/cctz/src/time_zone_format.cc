@@ -118,10 +118,10 @@ std::tm ToTM(const time_zone::absolute_lookup& al) {
   tm.tm_mon = al.cs.month() - 1;
 
   // Saturate tm.tm_year is cases of over/underflow.
-  if (al.cs.year() < std::numeric_limits<int>::min() + 1900) {
-    tm.tm_year = std::numeric_limits<int>::min();
-  } else if (al.cs.year() - 1900 > std::numeric_limits<int>::max()) {
-    tm.tm_year = std::numeric_limits<int>::max();
+  if (al.cs.year() < (std::numeric_limits<int>::min)() + 1900) {
+    tm.tm_year = (std::numeric_limits<int>::min)();
+  } else if (al.cs.year() - 1900 > (std::numeric_limits<int>::max)()) {
+    tm.tm_year = (std::numeric_limits<int>::max)();
   } else {
     tm.tm_year = static_cast<int>(al.cs.year() - 1900);
   }
@@ -149,7 +149,7 @@ char* Format64(char* ep, int width, std::int_fast64_t v) {
   if (v < 0) {
     --width;
     neg = true;
-    if (v == std::numeric_limits<std::int_fast64_t>::min()) {
+    if (v == (std::numeric_limits<std::int_fast64_t>::min)()) {
       // Avoid negating minimum value.
       std::int_fast64_t last_digit = -(v % 10);
       v /= 10;
@@ -232,7 +232,7 @@ void FormatTM(std::string* out, const std::string& fmt, const std::tm& tm) {
 template <typename T>
 const char* ParseInt(const char* dp, int width, T min, T max, T* vp) {
   if (dp != nullptr) {
-    const T kmin = std::numeric_limits<T>::min();
+    const T kmin = (std::numeric_limits<T>::min)();
     bool erange = false;
     bool neg = false;
     T value = 0;
@@ -662,9 +662,9 @@ bool FromWeek(int week_num, weekday week_start, year_t* year, std::tm* tm) {
   cd = next_weekday(cd - 1, FromTmWday(tm->tm_wday)) + (week_num * 7);
   if (const year_t shift = cd.year() - y.year()) {
     if (shift > 0) {
-      if (*year > std::numeric_limits<year_t>::max() - shift) return false;
+      if (*year > (std::numeric_limits<year_t>::max)() - shift) return false;
     } else {
-      if (*year < std::numeric_limits<year_t>::min() - shift) return false;
+      if (*year < (std::numeric_limits<year_t>::min)() - shift) return false;
     }
     *year += shift;
   }
@@ -698,8 +698,8 @@ bool parse(const std::string& format, const std::string& input,
   // Skips leading whitespace.
   while (std::isspace(*data)) ++data;
 
-  const year_t kyearmax = std::numeric_limits<year_t>::max();
-  const year_t kyearmin = std::numeric_limits<year_t>::min();
+  const year_t kyearmax = (std::numeric_limits<year_t>::max)();
+  const year_t kyearmin = (std::numeric_limits<year_t>::min)();
 
   // Sets default values for unspecified fields.
   bool saw_year = false;
@@ -814,8 +814,8 @@ bool parse(const std::string& format, const std::string& input,
         continue;
       case 's':
         data =
-            ParseInt(data, 0, std::numeric_limits<std::int_fast64_t>::min(),
-                     std::numeric_limits<std::int_fast64_t>::max(), &percent_s);
+            ParseInt(data, 0, (std::numeric_limits<std::int_fast64_t>::min)(),
+                     (std::numeric_limits<std::int_fast64_t>::max)(), &percent_s);
         if (data != nullptr) saw_percent_s = true;
         continue;
       case ':':
@@ -993,8 +993,8 @@ bool parse(const std::string& format, const std::string& input,
   }
 
   // Accounts for the offset adjustment before converting to absolute time.
-  if ((offset < 0 && cs > civil_second::max() + offset) ||
-      (offset > 0 && cs < civil_second::min() + offset)) {
+  if ((offset < 0 && cs > (civil_second::max)() + offset) ||
+      (offset > 0 && cs < (civil_second::min)() + offset)) {
     if (err != nullptr) *err = "Out-of-range field";
     return false;
   }
@@ -1002,15 +1002,15 @@ bool parse(const std::string& format, const std::string& input,
 
   const auto tp = ptz.lookup(cs).pre;
   // Checks for overflow/underflow and returns an error as necessary.
-  if (tp == time_point<seconds>::max()) {
-    const auto al = ptz.lookup(time_point<seconds>::max());
+  if (tp == (time_point<seconds>::max)()) {
+    const auto al = ptz.lookup((time_point<seconds>::max)());
     if (cs > al.cs) {
       if (err != nullptr) *err = "Out-of-range field";
       return false;
     }
   }
-  if (tp == time_point<seconds>::min()) {
-    const auto al = ptz.lookup(time_point<seconds>::min());
+  if (tp == (time_point<seconds>::min)()) {
+    const auto al = ptz.lookup((time_point<seconds>::min)());
     if (cs < al.cs) {
       if (err != nullptr) *err = "Out-of-range field";
       return false;

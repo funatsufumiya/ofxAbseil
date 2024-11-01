@@ -199,14 +199,14 @@ static constexpr int kLockwordReservedShift = 3;
 uint32_t SpinLock::EncodeWaitCycles(int64_t wait_start_time,
                                     int64_t wait_end_time) {
   static const int64_t kMaxWaitTime =
-      std::numeric_limits<uint32_t>::max() >> kLockwordReservedShift;
+      (std::numeric_limits<uint32_t>::max)() >> kLockwordReservedShift;
   int64_t scaled_wait_time =
       (wait_end_time - wait_start_time) >> kProfileTimestampShift;
 
   // Return a representation of the time spent waiting that can be stored in
   // the lock word's upper bits.
   uint32_t clamped = static_cast<uint32_t>(
-      std::min(scaled_wait_time, kMaxWaitTime) << kLockwordReservedShift);
+      (std::min)(scaled_wait_time, kMaxWaitTime) << kLockwordReservedShift);
 
   if (clamped == 0) {
     return kSpinLockSleeper;  // Just wake waiters, but don't record contention.

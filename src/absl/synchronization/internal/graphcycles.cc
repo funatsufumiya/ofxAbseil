@@ -464,7 +464,7 @@ void GraphCycles::RemoveNode(void* ptr) {
   x->in.clear();
   x->out.clear();
   x->masked_ptr = base_internal::HidePtr<void>(nullptr);
-  if (x->version == std::numeric_limits<uint32_t>::max()) {
+  if (x->version == (std::numeric_limits<uint32_t>::max)()) {
     // Cannot use x any more
   } else {
     x->version++;  // Invalidates all copies of node.

@@ -256,7 +256,7 @@ class BigUnsigned {
   //
   // This must be called in steps, for each word to be calculated, starting from
   // the high end and working down to 0.  The first value of `step` should be
-  //   `std::min(original_size + other.size_ - 2, max_words - 1)`.
+  //   `(std::min)(original_size + other.size_ - 2, max_words - 1)`.
   // The reason for this expression is that multiplying the i'th word from one
   // multiplicand and the j'th word of another multiplicand creates a
   // two-word-wide value to be stored at the (i+j)'th element.  The highest

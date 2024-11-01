@@ -122,7 +122,7 @@ void RandenPoolEntry::Fill(uint8_t* out, size_t bytes) {
   while (bytes > 0) {
     MaybeRefill();
     size_t remaining = (kState - next_) * sizeof(state_[0]);
-    size_t to_copy = std::min(bytes, remaining);
+    size_t to_copy = (std::min)(bytes, remaining);
     std::memcpy(out, &state_[next_], to_copy);
     out += to_copy;
     bytes -= to_copy;

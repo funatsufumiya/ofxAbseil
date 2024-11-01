@@ -567,9 +567,9 @@ constexpr absl::Duration MaxSleep() {
 #ifdef _WIN32
   // Windows Sleep() takes unsigned long argument in milliseconds.
   return absl::Milliseconds(
-      std::numeric_limits<unsigned long>::max());  // NOLINT(runtime/int)
+      (std::numeric_limits<unsigned long>::max)());  // NOLINT(runtime/int)
 #else
-  return absl::Seconds(std::numeric_limits<time_t>::max());
+  return absl::Seconds((std::numeric_limits<time_t>::max)());
 #endif
 }
 
@@ -595,7 +595,7 @@ extern "C" {
 ABSL_ATTRIBUTE_WEAK void ABSL_INTERNAL_C_SYMBOL(AbslInternalSleepFor)(
     absl::Duration duration) {
   while (duration > absl::ZeroDuration()) {
-    absl::Duration to_sleep = std::min(duration, absl::MaxSleep());
+    absl::Duration to_sleep = (std::min)(duration, absl::MaxSleep());
     absl::SleepOnce(to_sleep);
     duration -= to_sleep;
   }

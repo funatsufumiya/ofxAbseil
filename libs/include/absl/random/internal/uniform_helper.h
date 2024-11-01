@@ -186,7 +186,7 @@ uniform_upper_bound(Tag, FloatType, FloatType b) {
 //
 // The c++ standard constraints in [rand.dist.uni.real] are listed as:
 //    requires: lo <= hi.
-//    requires: (hi - lo) <= numeric_limits<T>::max()
+//    requires: (hi - lo) <= (numeric_limits<T>::max)()
 //
 // In the uniform_real_distribution, {lo, hi} are closed, open, Thus:
 // [0, 0] is legal, which is [0, 0+epsilon).

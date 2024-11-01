@@ -71,7 +71,7 @@ bool EndsWithIgnoreCase(absl::string_view text,
 
 absl::string_view FindLongestCommonPrefix(absl::string_view a,
                                           absl::string_view b) {
-  const absl::string_view::size_type limit = std::min(a.size(), b.size());
+  const absl::string_view::size_type limit = (std::min)(a.size(), b.size());
   const char* const pa = a.data();
   const char* const pb = b.data();
   absl::string_view::size_type count = (unsigned) 0;
@@ -114,7 +114,7 @@ absl::string_view FindLongestCommonPrefix(absl::string_view a,
 
 absl::string_view FindLongestCommonSuffix(absl::string_view a,
                                           absl::string_view b) {
-  const absl::string_view::size_type limit = std::min(a.size(), b.size());
+  const absl::string_view::size_type limit = (std::min)(a.size(), b.size());
   if (limit == 0) return absl::string_view();
 
   const char* pa = a.data() + a.size() - 1;

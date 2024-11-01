@@ -84,7 +84,7 @@ inline bool ArgContext::Bind(const UnboundConversion* unbound,
         // positive field width."
         force_left = true;
         // Make sure we don't overflow the width when negating it.
-        width = -(std::max)(width, -std::numeric_limits<int>::max());
+        width = -(std::max)(width, -(std::numeric_limits<int>::max)());
       }
     }
 
@@ -251,7 +251,7 @@ int FprintF(std::FILE* output, const UntypedFormatSpecImpl format,
     errno = sink.error();
     return -1;
   }
-  if (sink.count() > static_cast<size_t>(std::numeric_limits<int>::max())) {
+  if (sink.count() > static_cast<size_t>((std::numeric_limits<int>::max)())) {
     errno = EFBIG;
     return -1;
   }
@@ -266,7 +266,7 @@ int SnprintF(char* output, size_t size, const UntypedFormatSpecImpl format,
     return -1;
   }
   size_t total = sink.total_written();
-  if (size) output[std::min(total, size - 1)] = 0;
+  if (size) output[(std::min)(total, size - 1)] = 0;
   return static_cast<int>(total);
 }
 

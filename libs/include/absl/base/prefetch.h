@@ -94,7 +94,7 @@ void PrefetchToLocalCache(const void* addr);
 //
 //  template <typename Iterator>
 //  void DestroyPointers(Iterator begin, Iterator end) {
-//    size_t distance = std::min(8U, bars.size());
+//    size_t distance = (std::min)(8U, bars.size());
 //
 //    int dist = 8;
 //    auto prefetch_it = begin;

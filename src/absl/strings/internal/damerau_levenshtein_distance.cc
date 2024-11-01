@@ -34,7 +34,7 @@ namespace strings_internal {
 uint8_t CappedDamerauLevenshteinDistance(absl::string_view s1,
                                          absl::string_view s2, uint8_t cutoff) {
   const uint8_t MAX_SIZE = 100;
-  const uint8_t _cutoff = std::min(MAX_SIZE, cutoff);
+  const uint8_t _cutoff = (std::min)(MAX_SIZE, cutoff);
   const uint8_t cutoff_plus_1 = static_cast<uint8_t>(_cutoff + 1);
 
   if (s1.size() > s2.size()) std::swap(s1, s2);
@@ -80,7 +80,7 @@ uint8_t CappedDamerauLevenshteinDistance(absl::string_view s1,
       uint8_t transposition_distance = _cutoff + 1;
       if (i > 1 && j > 1 && s1[i - 1] == s2[j - 2] && s1[i - 2] == s2[j - 1])
         transposition_distance = d[i - 2][j - 2] + 1;
-      d[i][j] = std::min({cutoff_plus_1, deletion_distance, insertion_distance,
+      d[i][j] = (std::min)({cutoff_plus_1, deletion_distance, insertion_distance,
                           mismatch_distance, transposition_distance});
     }
   }

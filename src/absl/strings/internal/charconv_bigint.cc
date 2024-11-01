@@ -293,7 +293,7 @@ template <int max_words>
   bool first_pass = true;
   while (n >= kLargePowerOfFiveStep) {
     int big_power =
-        std::min(n / kLargePowerOfFiveStep, kLargestPowerOfFiveIndex);
+        (std::min)(n / kLargePowerOfFiveStep, kLargestPowerOfFiveIndex);
     if (first_pass) {
       // just copy, rather than multiplying by 1
       std::copy_n(LargePowerOfFiveData(big_power),
@@ -314,7 +314,7 @@ template <int max_words>
 void BigUnsigned<max_words>::MultiplyStep(int original_size,
                                           const uint32_t* other_words,
                                           int other_size, int step) {
-  int this_i = std::min(original_size - 1, step);
+  int this_i = (std::min)(original_size - 1, step);
   int other_i = step - this_i;
 
   uint64_t this_word = 0;

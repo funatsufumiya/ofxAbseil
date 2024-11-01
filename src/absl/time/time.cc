@@ -104,7 +104,7 @@ ABSL_INTERNAL_RESTORE_DEPRECATED_DECLARATION_WARNING
 
 inline absl::TimeZone::CivilInfo InfiniteFutureCivilInfo() {
   TimeZone::CivilInfo ci;
-  ci.cs = CivilSecond::max();
+  ci.cs = (CivilSecond::max)();
   ci.subsecond = InfiniteDuration();
   ci.offset = 0;
   ci.is_dst = false;
@@ -114,7 +114,7 @@ inline absl::TimeZone::CivilInfo InfiniteFutureCivilInfo() {
 
 inline absl::TimeZone::CivilInfo InfinitePastCivilInfo() {
   TimeZone::CivilInfo ci;
-  ci.cs = CivilSecond::min();
+  ci.cs = (CivilSecond::min)();
   ci.subsecond = -InfiniteDuration();
   ci.offset = 0;
   ci.is_dst = false;
@@ -146,8 +146,8 @@ Time MakeTimeWithOverflow(const cctz::time_point<cctz::seconds>& sec,
                           const cctz::civil_second& cs,
                           const cctz::time_zone& tz,
                           bool* normalized = nullptr) {
-  const auto max = cctz::time_point<cctz::seconds>::max();
-  const auto min = cctz::time_point<cctz::seconds>::min();
+  const auto max = (cctz::time_point<cctz::seconds>::max)();
+  const auto min = (cctz::time_point<cctz::seconds>::min)();
   if (sec == max) {
     const auto al = tz.lookup(max);
     if (cs > al.cs) {
@@ -310,10 +310,10 @@ timespec ToTimespec(Time t) {
     }
   }
   if (d >= absl::ZeroDuration()) {
-    ts.tv_sec = std::numeric_limits<time_t>::max();
+    ts.tv_sec = (std::numeric_limits<time_t>::max)();
     ts.tv_nsec = 1000 * 1000 * 1000 - 1;
   } else {
-    ts.tv_sec = std::numeric_limits<time_t>::min();
+    ts.tv_sec = (std::numeric_limits<time_t>::min)();
     ts.tv_nsec = 0;
   }
   return ts;
@@ -325,10 +325,10 @@ timeval ToTimeval(Time t) {
   tv.tv_sec = static_cast<decltype(tv.tv_sec)>(ts.tv_sec);
   if (tv.tv_sec != ts.tv_sec) {  // narrowing
     if (ts.tv_sec < 0) {
-      tv.tv_sec = std::numeric_limits<decltype(tv.tv_sec)>::min();
+      tv.tv_sec = (std::numeric_limits<decltype(tv.tv_sec)>::min)();
       tv.tv_usec = 0;
     } else {
-      tv.tv_sec = std::numeric_limits<decltype(tv.tv_sec)>::max();
+      tv.tv_sec = (std::numeric_limits<decltype(tv.tv_sec)>::max)();
       tv.tv_usec = 1000 * 1000 - 1;
     }
     return tv;
@@ -444,7 +444,7 @@ absl::Time FromTM(const struct tm& tm, absl::TimeZone tz) {
   if (tm_year > 300000000000ll) return InfiniteFuture();
   if (tm_year < -300000000000ll) return InfinitePast();
   int tm_mon = tm.tm_mon;
-  if (tm_mon == std::numeric_limits<int>::max()) {
+  if (tm_mon == (std::numeric_limits<int>::max)()) {
     tm_mon -= 12;
     tm_year += 1;
   }
@@ -466,10 +466,10 @@ struct tm ToTM(absl::Time t, absl::TimeZone tz) {
 
   // Saturates tm.tm_year in cases of over/underflow, accounting for the fact
   // that tm.tm_year is years since 1900.
-  if (cs.year() < std::numeric_limits<int>::min() + 1900) {
-    tm.tm_year = std::numeric_limits<int>::min();
-  } else if (cs.year() > std::numeric_limits<int>::max()) {
-    tm.tm_year = std::numeric_limits<int>::max() - 1900;
+  if (cs.year() < (std::numeric_limits<int>::min)() + 1900) {
+    tm.tm_year = (std::numeric_limits<int>::min)();
+  } else if (cs.year() > (std::numeric_limits<int>::max)()) {
+    tm.tm_year = (std::numeric_limits<int>::max)() - 1900;
   } else {
     tm.tm_year = static_cast<int>(cs.year() - 1900);
   }

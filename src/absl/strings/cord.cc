@@ -294,7 +294,7 @@ static inline bool PrepareAppendRegion(
     return false;
   }
 
-  const size_t size_increase = std::min(capacity - in_use, max_length);
+  const size_t size_increase = (std::min)(capacity - in_use, max_length);
   dst->length += size_increase;
 
   *region = dst->flat()->Data() + in_use;
@@ -452,7 +452,7 @@ void Cord::InlineRep::AppendArray(absl::string_view src,
     // Subsequent growth will use amortized growth until we reach maximum flat
     // size.
     rep = CordRepFlat::New(inline_length + src.size());
-    appended = std::min(src.size(), rep->flat()->Capacity() - inline_length);
+    appended = (std::min)(src.size(), rep->flat()->Capacity() - inline_length);
     memcpy(rep->flat()->Data(), data_.as_chars(), inline_length);
     memcpy(rep->flat()->Data() + inline_length, src.data(), appended);
     rep->length = inline_length + appended;
@@ -550,7 +550,7 @@ static CordRep::ExtractResult ExtractAppendBuffer(absl::Nonnull<CordRep*> rep,
 
 static CordBuffer CreateAppendBuffer(InlineData& data, size_t block_size,
                                      size_t capacity) {
-  // Watch out for overflow, people can ask for size_t::max().
+  // Watch out for overflow, people can ask for (size_t::max)().
   const size_t size = data.inline_size();
   const size_t max_capacity = (std::numeric_limits<size_t>::max)() - size;
   capacity = (std::min)(max_capacity, capacity) + size;
@@ -784,7 +784,7 @@ int ClampResult(int memcmp_res) {
 int CompareChunks(absl::Nonnull<absl::string_view*> lhs,
                   absl::Nonnull<absl::string_view*> rhs,
                   absl::Nonnull<size_t*> size_to_compare) {
-  size_t compared_size = std::min(lhs->size(), rhs->size());
+  size_t compared_size = (std::min)(lhs->size(), rhs->size());
   assert(*size_to_compare >= compared_size);
   *size_to_compare -= compared_size;
 
@@ -979,7 +979,7 @@ ResultType GenericCompare(const Cord& lhs, const RHS& rhs,
   absl::string_view lhs_chunk = Cord::GetFirstChunk(lhs);
   absl::string_view rhs_chunk = Cord::GetFirstChunk(rhs);
 
-  size_t compared_size = std::min(lhs_chunk.size(), rhs_chunk.size());
+  size_t compared_size = (std::min)(lhs_chunk.size(), rhs_chunk.size());
   assert(size_to_compare >= compared_size);
   int memcmp_res = ::memcmp(lhs_chunk.data(), rhs_chunk.data(), compared_size);
   if (compared_size == size_to_compare || memcmp_res != 0) {
@@ -1195,7 +1195,7 @@ bool IsSubstringInCordAt(absl::Cord::CharIterator position,
     // Precondition is that `absl::Cord::ChunkRemaining(position)` is not
     // empty. This assert will trigger if that is not true.
     assert(!haystack_chunk.empty());
-    auto min_length = std::min(haystack_chunk.size(), needle.size());
+    auto min_length = (std::min)(haystack_chunk.size(), needle.size());
     if (!absl::ConsumePrefix(&needle, haystack_chunk.substr(0, min_length))) {
       return false;
     }
@@ -1294,7 +1294,7 @@ bool IsSubcordInCordAt(absl::Cord::CharIterator haystack,
     auto haystack_chunk = absl::Cord::ChunkRemaining(haystack);
     assert(!haystack_chunk.empty());
     auto needle_chunk = absl::Cord::ChunkRemaining(needle_begin);
-    auto min_length = std::min(haystack_chunk.size(), needle_chunk.size());
+    auto min_length = (std::min)(haystack_chunk.size(), needle_chunk.size());
     if (haystack_chunk.substr(0, min_length) !=
         needle_chunk.substr(0, min_length)) {
       return false;

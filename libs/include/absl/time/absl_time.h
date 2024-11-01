@@ -676,7 +676,7 @@ ABSL_ATTRIBUTE_PURE_FUNCTION constexpr Duration FromChrono(
 //   auto x = absl::ToChronoMicroseconds(d);
 //   auto y = absl::ToChronoNanoseconds(d);  // x == y
 //   auto z = absl::ToChronoSeconds(absl::InfiniteDuration());
-//   // z == std::chrono::seconds::max()
+//   // z == (std::chrono::seconds::max)()
 ABSL_ATTRIBUTE_CONST_FUNCTION std::chrono::nanoseconds ToChronoNanoseconds(
     Duration d);
 ABSL_ATTRIBUTE_CONST_FUNCTION std::chrono::microseconds ToChronoMicroseconds(
@@ -1123,7 +1123,7 @@ class TimeZone {
   //
   // Returns the civil time for this TimeZone at a certain `absl::Time`.
   // If the input time is infinite, the output civil second will be set to
-  // CivilSecond::max() or min(), and the subsecond will be infinite.
+  // (CivilSecond::max)() or min(), and the subsecond will be infinite.
   //
   // Example:
   //

@@ -98,7 +98,7 @@ class beta_distribution {
       if (a_ >= ThresholdForLargeA()) {
         method_ = DEGENERATE_LARGE;
         // Note: on PPC for long double, evaluating
-        // `std::numeric_limits::max() / ThresholdForLargeA` results in NaN.
+        // `(std::numeric_limits::max)() / ThresholdForLargeA` results in NaN.
         result_type r = a_ / b_;
         x_ = (inverted_ ? result_type(1) : r) / (1 + r);
         return;

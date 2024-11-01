@@ -655,7 +655,7 @@ class RustSymbolParser {
     bool overflowed = false;
     while (IsAlpha(Peek()) || IsDigit(Peek())) {
       const char c = Take();
-      if (encoded_number >= std::numeric_limits<int>::max()/62) {
+      if (encoded_number >= (std::numeric_limits<int>::max)()/62) {
         // If we are close to overflowing an int, keep parsing but stop updating
         // encoded_number and remember to return -1 at the end.  The point is to
         // avoid undefined behavior while parsing crate-root disambiguators,
@@ -777,7 +777,7 @@ class RustSymbolParser {
     }
     while (IsDigit(Peek()) &&
            // avoid overflow
-           encoded_number < std::numeric_limits<int>::max()/10) {
+           encoded_number < (std::numeric_limits<int>::max)()/10) {
       encoded_number = 10 * encoded_number + (Take() - '0');
     }
     if (IsDigit(Peek())) return false;  // too big

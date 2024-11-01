@@ -377,7 +377,7 @@ bool HandleEdgeCase(const strings_internal::ParsedFloat& input, bool negative,
       n_char_sequence[0] = '\0';
     } else {
       ptrdiff_t nan_size = input.subrange_end - input.subrange_begin;
-      nan_size = std::min(nan_size, kNanBufferSize - 1);
+      nan_size = (std::min)(nan_size, kNanBufferSize - 1);
       std::copy_n(input.subrange_begin, nan_size, n_char_sequence);
       n_char_sequence[nan_size] = '\0';
     }
@@ -410,8 +410,8 @@ void EncodeResult(const CalculatedFloat& calculated, bool negative,
                   absl::Nonnull<FloatType*> value) {
   if (calculated.exponent == kOverflow) {
     result->ec = std::errc::result_out_of_range;
-    *value = negative ? -std::numeric_limits<FloatType>::max()
-                      : std::numeric_limits<FloatType>::max();
+    *value = negative ? -(std::numeric_limits<FloatType>::max)()
+                      : (std::numeric_limits<FloatType>::max)();
     return;
   } else if (calculated.mantissa == 0 || calculated.exponent == kUnderflow) {
     result->ec = std::errc::result_out_of_range;
@@ -698,8 +698,8 @@ bool EiselLemire(const strings_internal::ParsedFloat& input, bool negative,
   } else if (exp10 >= FloatTraits<FloatType>::kEiselLemireMaxExclusiveExp10) {
     // Return max (a finite value) consistent with from_chars and DR 3081. For
     // SimpleAtod and SimpleAtof, post-processing will return infinity.
-    *value = negative ? -std::numeric_limits<FloatType>::max()
-                      : std::numeric_limits<FloatType>::max();
+    *value = negative ? -(std::numeric_limits<FloatType>::max)()
+                      : (std::numeric_limits<FloatType>::max)();
     *ec = std::errc::result_out_of_range;
     return true;
   }
@@ -744,7 +744,7 @@ bool EiselLemire(const strings_internal::ParsedFloat& input, bool negative,
   static constexpr uint64_t high64_mask =
       FloatTraits<FloatType>::kEiselLemireMask;
   if (((Uint128High64(x) & high64_mask) == high64_mask) &&
-      (man > (std::numeric_limits<uint64_t>::max() - Uint128Low64(x)))) {
+      (man > ((std::numeric_limits<uint64_t>::max)() - Uint128Low64(x)))) {
     uint128 y =
         static_cast<uint128>(man) *
         static_cast<uint128>(
@@ -761,7 +761,7 @@ bool EiselLemire(const strings_internal::ParsedFloat& input, bool negative,
     //  - man = 0x9C40000000000000
     if (((Uint128High64(x) & high64_mask) == high64_mask) &&
         ((Uint128Low64(x) + 1) == 0) &&
-        (man > (std::numeric_limits<uint64_t>::max() - Uint128Low64(y)))) {
+        (man > ((std::numeric_limits<uint64_t>::max)() - Uint128Low64(y)))) {
       return false;
     }
   }

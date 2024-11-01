@@ -207,12 +207,12 @@ time_zone::absolute_lookup TimeZoneLibC::BreakTime(
   const std::int_fast64_t s = ToUnixSeconds(tp);
 
   // If std::time_t cannot hold the input we saturate the output.
-  if (s < std::numeric_limits<std::time_t>::min()) {
-    al.cs = civil_second::min();
+  if (s < (std::numeric_limits<std::time_t>::min)()) {
+    al.cs = (civil_second::min)();
     return al;
   }
-  if (s > std::numeric_limits<std::time_t>::max()) {
-    al.cs = civil_second::max();
+  if (s > (std::numeric_limits<std::time_t>::max)()) {
+    al.cs = (civil_second::max)();
     return al;
   }
 
@@ -222,7 +222,7 @@ time_zone::absolute_lookup TimeZoneLibC::BreakTime(
 
   // If std::tm cannot hold the result we saturate the output.
   if (tmp == nullptr) {
-    al.cs = (s < 0) ? civil_second::min() : civil_second::max();
+    al.cs = (s < 0) ? (civil_second::min)() : (civil_second::max)();
     return al;
   }
 
@@ -239,25 +239,25 @@ time_zone::civil_lookup TimeZoneLibC::MakeTime(const civil_second& cs) const {
   if (!local_) {
     // If time_point<seconds> cannot hold the result we saturate.
     static const civil_second min_tp_cs =
-        civil_second() + ToUnixSeconds(time_point<seconds>::min());
+        civil_second() + ToUnixSeconds((time_point<seconds>::min)());
     static const civil_second max_tp_cs =
-        civil_second() + ToUnixSeconds(time_point<seconds>::max());
-    const time_point<seconds> tp = (cs < min_tp_cs) ? time_point<seconds>::min()
+        civil_second() + ToUnixSeconds((time_point<seconds>::max)());
+    const time_point<seconds> tp = (cs < min_tp_cs) ? (time_point<seconds>::min)()
                                    : (cs > max_tp_cs)
-                                       ? time_point<seconds>::max()
+                                       ? (time_point<seconds>::max)()
                                        : FromUnixSeconds(cs - civil_second());
     return {time_zone::civil_lookup::UNIQUE, tp, tp, tp};
   }
 
   // If tm_year cannot hold the requested year we saturate the result.
   if (cs.year() < 0) {
-    if (cs.year() < std::numeric_limits<int>::min() + year_t{1900}) {
-      const time_point<seconds> tp = time_point<seconds>::min();
+    if (cs.year() < (std::numeric_limits<int>::min)() + year_t{1900}) {
+      const time_point<seconds> tp = (time_point<seconds>::min)();
       return {time_zone::civil_lookup::UNIQUE, tp, tp, tp};
     }
   } else {
-    if (cs.year() - year_t{1900} > std::numeric_limits<int>::max()) {
-      const time_point<seconds> tp = time_point<seconds>::max();
+    if (cs.year() - year_t{1900} > (std::numeric_limits<int>::max)()) {
+      const time_point<seconds> tp = (time_point<seconds>::max)();
       return {time_zone::civil_lookup::UNIQUE, tp, tp, tp};
     }
   }
@@ -301,8 +301,8 @@ time_zone::civil_lookup TimeZoneLibC::MakeTime(const civil_second& cs) const {
 
   // make_time() failed somehow so we saturate the result.
   const time_point<seconds> tp = (cs < civil_second())
-                                     ? time_point<seconds>::min()
-                                     : time_point<seconds>::max();
+                                     ? (time_point<seconds>::min)()
+                                     : (time_point<seconds>::max)();
   return {time_zone::civil_lookup::UNIQUE, tp, tp, tp};
 }
 

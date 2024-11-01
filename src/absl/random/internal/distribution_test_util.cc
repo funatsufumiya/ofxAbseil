@@ -320,7 +320,7 @@ double BetaIncompleteInvImpl(const double p, const double q, const double beta,
       y = (y - alpha) *
           std::exp(beta + r * std::log(value) + t * std::log(1.0 - value));
       if (y * yprev <= 0) {
-        prev = (std::max)(sq, std::numeric_limits<double>::min());
+        prev = (std::max)(sq, (std::numeric_limits<double>::min)());
       }
       double g = 1.0;
       for (;;) {

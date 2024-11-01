@@ -116,10 +116,10 @@ class NonsecureURBGBase {
   // enclose min() or max() in parens as (min)() and (max)().
   // Additionally, clang-format requires no space before this construction.
 
-  // NonsecureURBGBase::min()
+  // (NonsecureURBGBase::min)()
   static constexpr result_type(min)() { return (URBG::min)(); }
 
-  // NonsecureURBGBase::max()
+  // (NonsecureURBGBase::max)()
   static constexpr result_type(max)() { return (URBG::max)(); }
 
   // NonsecureURBGBase::operator()()

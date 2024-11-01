@@ -273,7 +273,7 @@ class CordRepBtree : public CordRep {
   //     ExtractResult result = CordRepBtree::ExtractAppendBuffer(tree_, 1);
   //     if (CordRep* rep = result.extracted) {
   //       size_t available = rep->Capacity() - rep->length;
-  //       size_t n = std::min(data.size(), n);
+  //       size_t n = (std::min)(data.size(), n);
   //       memcpy(rep->Data(), data.data(), n);
   //       rep->length += n;
   //       data.remove_prefix(n);

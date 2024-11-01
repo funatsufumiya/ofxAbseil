@@ -258,7 +258,7 @@ inline ABSL_ATTRIBUTE_ALWAYS_INLINE absl::Nonnull<char*> EncodeFullU32(
 
 inline ABSL_ATTRIBUTE_ALWAYS_INLINE char* EncodeFullU64(uint64_t i,
                                                         char* buffer) {
-  if (i <= std::numeric_limits<uint32_t>::max()) {
+  if (i <= (std::numeric_limits<uint32_t>::max)()) {
     return EncodeFullU32(static_cast<uint32_t>(i), buffer);
   }
   uint32_t mod08;
@@ -566,7 +566,7 @@ size_t numbers_internal::SixDigitsToBuffer(double d,
     *out++ = '-';
     d = -d;
   }
-  if (d > std::numeric_limits<double>::max()) {
+  if (d > (std::numeric_limits<double>::max)()) {
     strcpy(out, "inf");  // NOLINT(runtime/printf)
     return static_cast<size_t>(out + 3 - buffer);
   }
@@ -812,7 +812,7 @@ struct LookupTables {
 
 // This kVmaxOverBase is generated with
 //  for (int base = 2; base < 37; ++base) {
-//    absl::uint128 max = std::numeric_limits<absl::uint128>::max();
+//    absl::uint128 max = (std::numeric_limits<absl::uint128>::max)();
 //    auto result = max / base;
 //    std::cout << "    MakeUint128(" << absl::Uint128High64(result) << "u, "
 //              << absl::Uint128Low64(result) << "u),\n";
@@ -864,7 +864,7 @@ ABSL_CONST_INIT const uint128 LookupTables<uint128>::kVmaxOverBase[] = {
 
 // This kVmaxOverBase generated with
 //   for (int base = 2; base < 37; ++base) {
-//    absl::int128 max = std::numeric_limits<absl::int128>::max();
+//    absl::int128 max = (std::numeric_limits<absl::int128>::max)();
 //    auto result = max / base;
 //    std::cout << "\tMakeInt128(" << absl::Int128High64(result) << ", "
 //              << absl::Int128Low64(result) << "u),\n";
@@ -916,7 +916,7 @@ ABSL_CONST_INIT const int128 LookupTables<int128>::kVmaxOverBase[] = {
 
 // This kVminOverBase generated with
 //  for (int base = 2; base < 37; ++base) {
-//    absl::int128 min = std::numeric_limits<absl::int128>::min();
+//    absl::int128 min = (std::numeric_limits<absl::int128>::min)();
 //    auto result = min / base;
 //    std::cout << "\tMakeInt128(" << absl::Int128High64(result) << ", "
 //              << absl::Int128Low64(result) << "u),\n";
@@ -969,11 +969,11 @@ ABSL_CONST_INIT const int128 LookupTables<int128>::kVminOverBase[] = {
 
 template <typename IntType>
 ABSL_CONST_INIT const IntType LookupTables<IntType>::kVmaxOverBase[] =
-    X_OVER_BASE_INITIALIZER(std::numeric_limits<IntType>::max());
+    X_OVER_BASE_INITIALIZER((std::numeric_limits<IntType>::max)());
 
 template <typename IntType>
 ABSL_CONST_INIT const IntType LookupTables<IntType>::kVminOverBase[] =
-    X_OVER_BASE_INITIALIZER(std::numeric_limits<IntType>::min());
+    X_OVER_BASE_INITIALIZER((std::numeric_limits<IntType>::min)());
 
 #undef X_OVER_BASE_INITIALIZER
 
@@ -981,14 +981,14 @@ template <typename IntType>
 inline bool safe_parse_positive_int(absl::string_view text, int base,
                                     absl::Nonnull<IntType*> value_p) {
   IntType value = 0;
-  const IntType vmax = std::numeric_limits<IntType>::max();
+  const IntType vmax = (std::numeric_limits<IntType>::max)();
   assert(vmax > 0);
   assert(base >= 0);
   const IntType base_inttype = static_cast<IntType>(base);
   assert(vmax >= base_inttype);
   const IntType vmax_over_base = LookupTables<IntType>::kVmaxOverBase[base];
   assert(base < 2 ||
-         std::numeric_limits<IntType>::max() / base_inttype == vmax_over_base);
+         (std::numeric_limits<IntType>::max)() / base_inttype == vmax_over_base);
   const char* start = text.data();
   const char* end = start + text.size();
   // loop over digits
@@ -1018,12 +1018,12 @@ template <typename IntType>
 inline bool safe_parse_negative_int(absl::string_view text, int base,
                                     absl::Nonnull<IntType*> value_p) {
   IntType value = 0;
-  const IntType vmin = std::numeric_limits<IntType>::min();
+  const IntType vmin = (std::numeric_limits<IntType>::min)();
   assert(vmin < 0);
   assert(vmin <= 0 - base);
   IntType vmin_over_base = LookupTables<IntType>::kVminOverBase[base];
   assert(base < 2 ||
-         std::numeric_limits<IntType>::min() / base == vmin_over_base);
+         (std::numeric_limits<IntType>::min)() / base == vmin_over_base);
   // 2003 c++ standard [expr.mul]
   // "... the sign of the remainder is implementation-defined."
   // Although (vmin/base)*base + vmin%base is always vmin.

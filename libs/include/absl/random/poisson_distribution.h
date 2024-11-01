@@ -44,7 +44,7 @@ ABSL_NAMESPACE_BEGIN
 // http://www.sciencedirect.com/science/article/pii/0377042790903495
 //
 // NOTE: param_type.mean() is a double, which permits values larger than
-// poisson_distribution<IntType>::max(), however this should be avoided and
+// (poisson_distribution<IntType>::max)(), however this should be avoided and
 // the distribution results are limited to the max() value.
 //
 // The goals of this implementation are to provide good performance while still

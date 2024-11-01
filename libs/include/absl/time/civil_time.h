@@ -313,7 +313,7 @@ struct year_tag : month_tag, cctz::detail::year_tag {};
 //   // Add 1 to month field, capping to the end of next month.
 //   const auto next_month = absl::CivilMonth(d) + 1;
 //   const auto last_day_of_next_month = absl::CivilDay(next_month + 1) - 1;
-//   const auto capped = std::min(normalized, last_day_of_next_month);
+//   const auto capped = (std::min)(normalized, last_day_of_next_month);
 //   // capped == 2015-02-28
 //
 //   // Answer 3:

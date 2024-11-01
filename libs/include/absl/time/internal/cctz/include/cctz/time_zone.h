@@ -174,7 +174,7 @@ class time_zone {
   //   cctz::time_zone nyc;
   //   if (!cctz::load_time_zone("America/New_York", &nyc)) { ... }
   //   const auto now = std::chrono::system_clock::now();
-  //   auto tp = cctz::time_point<cctz::seconds>::min();
+  //   auto tp = (cctz::time_point<cctz::seconds>::min)();
   //   cctz::time_zone::civil_transition trans;
   //   while (tp <= now && nyc.next_transition(tp, &trans)) {
   //     // transition: trans.from -> trans.to

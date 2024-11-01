@@ -130,7 +130,7 @@ ByLength::ByLength(ptrdiff_t length) : length_(length) {
 }
 
 absl::string_view ByLength::Find(absl::string_view text, size_t pos) const {
-  pos = std::min(pos, text.size());  // truncate `pos`
+  pos = (std::min)(pos, text.size());  // truncate `pos`
   absl::string_view substr = text.substr(pos);
   // If the string is shorter than the chunk size we say we
   // "can't find the delimiter" so this will be the last chunk.

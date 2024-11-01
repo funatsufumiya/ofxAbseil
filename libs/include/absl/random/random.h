@@ -103,11 +103,11 @@ ABSL_NAMESPACE_BEGIN
 //
 // Calls the BitGen, returning a generated value.
 
-// absl::BitGen::min()
+// (absl::BitGen::min)()
 //
 // Returns the smallest possible value from this bit generator.
 
-// absl::BitGen::max()
+// (absl::BitGen::max)()
 //
 // Returns the largest possible value from this bit generator.
 
@@ -169,11 +169,11 @@ using InsecureBitGen =
 //
 // Calls the InsecureBitGen, returning a generated value.
 
-// absl::InsecureBitGen::min()
+// (absl::InsecureBitGen::min)()
 //
 // Returns the smallest possible value from this bit generator.
 
-// absl::InsecureBitGen::max()
+// (absl::InsecureBitGen::max)()
 //
 // Returns the largest possible value from this bit generator.
 

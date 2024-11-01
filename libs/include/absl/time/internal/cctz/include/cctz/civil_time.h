@@ -255,7 +255,7 @@ namespace cctz {
 //   // Add 1 to month field, capping to the end of next month.
 //   const auto next_month = civil_month(d) + 1;
 //   const auto last_day_of_next_month = civil_day(next_month + 1) - 1;
-//   const auto ans_capped = std::min(ans_normalized, last_day_of_next_month);
+//   const auto ans_capped = (std::min)(ans_normalized, last_day_of_next_month);
 //   // ans_capped == 2015-02-28
 //
 //   // Answer 3:

@@ -58,7 +58,7 @@ void WritePadding(std::ostream& o, size_t pad) {
   char fill_buf[32];
   memset(fill_buf, o.fill(), sizeof(fill_buf));
   while (pad) {
-    size_t n = std::min(pad, sizeof(fill_buf));
+    size_t n = (std::min)(pad, sizeof(fill_buf));
     o.write(fill_buf, static_cast<std::streamsize>(n));
     pad -= n;
   }
@@ -127,8 +127,8 @@ string_view::size_type string_view::find(char c, size_type pos) const noexcept {
 string_view::size_type string_view::rfind(string_view s,
                                           size_type pos) const noexcept {
   if (length_ < s.length_) return npos;
-  if (s.empty()) return std::min(length_, pos);
-  const char* last = ptr_ + std::min(length_ - s.length_, pos) + s.length_;
+  if (s.empty()) return (std::min)(length_, pos);
+  const char* last = ptr_ + (std::min)(length_ - s.length_, pos) + s.length_;
   const char* result = std::find_end(ptr_, last, s.ptr_, s.ptr_ + s.length_);
   return result != last ? static_cast<size_type>(result - ptr_) : npos;
 }
@@ -138,7 +138,7 @@ string_view::size_type string_view::rfind(char c,
                                           size_type pos) const noexcept {
   // Note: memrchr() is not available on Windows.
   if (empty()) return npos;
-  for (size_type i = std::min(pos, length_ - 1);; --i) {
+  for (size_type i = (std::min)(pos, length_ - 1);; --i) {
     if (ptr_[i] == c) {
       return i;
     }
@@ -194,7 +194,7 @@ string_view::size_type string_view::find_last_of(string_view s,
   // Avoid the cost of LookupTable() for a single-character search.
   if (s.length_ == 1) return find_last_of(s.ptr_[0], pos);
   LookupTable tbl(s);
-  for (size_type i = std::min(pos, length_ - 1);; --i) {
+  for (size_type i = (std::min)(pos, length_ - 1);; --i) {
     if (tbl[ptr_[i]]) {
       return i;
     }
@@ -206,7 +206,7 @@ string_view::size_type string_view::find_last_of(string_view s,
 string_view::size_type string_view::find_last_not_of(
     string_view s, size_type pos) const noexcept {
   if (empty()) return npos;
-  size_type i = std::min(pos, length_ - 1);
+  size_type i = (std::min)(pos, length_ - 1);
   if (s.empty()) return i;
   // Avoid the cost of LookupTable() for a single-character search.
   if (s.length_ == 1) return find_last_not_of(s.ptr_[0], pos);
@@ -223,7 +223,7 @@ string_view::size_type string_view::find_last_not_of(
 string_view::size_type string_view::find_last_not_of(
     char c, size_type pos) const noexcept {
   if (empty()) return npos;
-  size_type i = std::min(pos, length_ - 1);
+  size_type i = (std::min)(pos, length_ - 1);
   for (;; --i) {
     if (ptr_[i] != c) {
       return i;

@@ -111,10 +111,10 @@ constexpr int kHexadecimalDigitLimit = kDecimalDigitLimit / 4;
 // significant digits before the decimal point, there are independent limits for
 // post-decimal-point leading zeroes and for significant digits.)
 static_assert(999999999 + 2 * kDecimalDigitLimit <
-                  std::numeric_limits<int>::max(),
+                  (std::numeric_limits<int>::max)(),
               "int type too small");
 static_assert(999999999 + 2 * (4 * kHexadecimalDigitLimit) <
-                  std::numeric_limits<int>::max(),
+                  (std::numeric_limits<int>::max)(),
               "int type too small");
 
 // Returns true if the provided bitfield allows parsing an exponent value

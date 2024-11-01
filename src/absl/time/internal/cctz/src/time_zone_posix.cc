@@ -33,7 +33,7 @@ const char kDigits[] = "0123456789";
 const char* ParseInt(const char* p, int min, int max, int* vp) {
   int value = 0;
   const char* op = p;
-  const int kMaxInt = std::numeric_limits<int>::max();
+  const int kMaxInt = (std::numeric_limits<int>::max)();
   for (; const char* dp = strchr(kDigits, *p); ++p) {
     int d = static_cast<int>(dp - kDigits);
     if (d >= 10) break;  // '\0'

@@ -400,13 +400,13 @@ class FileZoneInfoSource : public ZoneInfoSource {
   static std::unique_ptr<ZoneInfoSource> Open(const std::string& name);
 
   std::size_t Read(void* ptr, std::size_t size) override {
-    size = std::min(size, len_);
+    size = (std::min)(size, len_);
     std::size_t nread = fread(ptr, 1, size, fp_.get());
     len_ -= nread;
     return nread;
   }
   int Skip(std::size_t offset) override {
-    offset = std::min(offset, len_);
+    offset = (std::min)(offset, len_);
     int rc = fseek(fp_.get(), static_cast<long>(offset), SEEK_CUR);
     if (rc == 0) len_ -= offset;
     return rc;
@@ -418,7 +418,7 @@ class FileZoneInfoSource : public ZoneInfoSource {
 
  protected:
   explicit FileZoneInfoSource(
-      FilePtr fp, std::size_t len = std::numeric_limits<std::size_t>::max())
+      FilePtr fp, std::size_t len = (std::numeric_limits<std::size_t>::max)())
       : fp_(std::move(fp)), len_(len) {}
 
  private:
@@ -624,8 +624,8 @@ bool TimeZoneInfo::ResetToBuiltinUTC(const seconds& offset) {
   future_spec_.clear();  // never needed for a fixed-offset zone
   extended_ = false;
 
-  tt.civil_max = LocalTime(seconds::max().count(), tt).cs;
-  tt.civil_min = LocalTime(seconds::min().count(), tt).cs;
+  tt.civil_max = LocalTime((seconds::max)().count(), tt).cs;
+  tt.civil_min = LocalTime((seconds::min)().count(), tt).cs;
 
   transitions_.shrink_to_fit();
   return true;
@@ -797,8 +797,8 @@ bool TimeZoneInfo::Load(ZoneInfoSource* zip) {
   // Compute the maximum/minimum civil times that can be converted to a
   // time_point<seconds> for each of the zone's transition types.
   for (auto& tt : transition_types_) {
-    tt.civil_max = LocalTime(seconds::max().count(), tt).cs;
-    tt.civil_min = LocalTime(seconds::min().count(), tt).cs;
+    tt.civil_max = LocalTime((seconds::max)().count(), tt).cs;
+    tt.civil_min = LocalTime((seconds::min)().count(), tt).cs;
   }
 
   transitions_.shrink_to_fit();
@@ -863,14 +863,14 @@ time_zone::civil_lookup TimeZoneInfo::TimeLocal(const civil_second& cs,
                                                 year_t c4_shift) const {
   assert(last_year_ - 400 < cs.year() && cs.year() <= last_year_);
   time_zone::civil_lookup cl = MakeTime(cs);
-  if (c4_shift > seconds::max().count() / kSecsPer400Years) {
-    cl.pre = cl.trans = cl.post = time_point<seconds>::max();
+  if (c4_shift > (seconds::max)().count() / kSecsPer400Years) {
+    cl.pre = cl.trans = cl.post = (time_point<seconds>::max)();
   } else {
     const auto offset = seconds(c4_shift * kSecsPer400Years);
-    const auto limit = time_point<seconds>::max() - offset;
+    const auto limit = (time_point<seconds>::max)() - offset;
     for (auto* tp : {&cl.pre, &cl.trans, &cl.post}) {
       if (*tp > limit) {
-        *tp = time_point<seconds>::max();
+        *tp = (time_point<seconds>::max)();
       } else {
         *tp += offset;
       }
@@ -955,7 +955,7 @@ time_zone::civil_lookup TimeZoneInfo::MakeTime(const civil_second& cs) const {
     if (tr->prev_civil_sec >= cs) {
       // Before first transition, so use the default offset.
       const TransitionType& tt(transition_types_[default_transition_type_]);
-      if (cs < tt.civil_min) return MakeUnique(time_point<seconds>::min());
+      if (cs < tt.civil_min) return MakeUnique((time_point<seconds>::min)());
       return MakeUnique(cs - (civil_second() + tt.utc_offset));
     }
     // tr->prev_civil_sec < cs < tr->civil_sec
@@ -972,7 +972,7 @@ time_zone::civil_lookup TimeZoneInfo::MakeTime(const civil_second& cs) const {
         return TimeLocal(YearShift(cs, shift * -400), shift);
       }
       const TransitionType& tt(transition_types_[tr->type_index]);
-      if (cs > tt.civil_max) return MakeUnique(time_point<seconds>::max());
+      if (cs > tt.civil_max) return MakeUnique((time_point<seconds>::max)());
       return MakeUnique(tr->unix_time + (cs - tr->civil_sec));
     }
     // tr->civil_sec <= cs <= tr->prev_civil_sec
@@ -1041,7 +1041,7 @@ bool TimeZoneInfo::PrevTransition(const time_point<seconds>& tp,
   }
   std::int_fast64_t unix_time = ToUnixSeconds(tp);
   if (FromUnixSeconds(unix_time) != tp) {
-    if (unix_time == std::numeric_limits<std::int_fast64_t>::max()) {
+    if (unix_time == (std::numeric_limits<std::int_fast64_t>::max)()) {
       if (end == begin) return false;  // Ignore future_spec_.
       trans->from = (--end)->prev_civil_sec + 1;
       trans->to = end->civil_sec;

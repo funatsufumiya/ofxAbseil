@@ -316,7 +316,7 @@ class InlinedVector {
     // One bit of the size storage is used to indicate whether the inlined
     // vector contains allocated memory. As a result, the maximum size that the
     // inlined vector can express is the minimum of the limit of how many
-    // objects we can allocate and std::numeric_limits<size_type>::max() / 2.
+    // objects we can allocate and (std::numeric_limits<size_type>::max)() / 2.
     return (std::min)(AllocatorTraits<A>::max_size(storage_.GetAllocator()),
                       (std::numeric_limits<size_type>::max)() / 2);
   }
