@@ -1,6 +1,6 @@
 # ofxAbseil
 
-abseil-cpp for openFrameworks (tested on v0.12.0, abseil version: `lts_2024_07_22`)
+[abseil-cpp](https://github.com/abseil/abseil-cpp) for openFrameworks (tested on v0.12.0, abseil version: `lts_2024_07_22`)
 
 ## Note
 
