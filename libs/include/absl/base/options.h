@@ -67,9 +67,6 @@
 #ifndef ABSL_BASE_OPTIONS_H_
 #define ABSL_BASE_OPTIONS_H_
 
-#define ABSL_BUILD_DLL 0
-#define ABSL_CONSUME_DLL 0
-
 // -----------------------------------------------------------------------------
 // Type Compatibility Options
 // -----------------------------------------------------------------------------
