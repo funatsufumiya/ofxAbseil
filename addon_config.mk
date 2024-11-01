@@ -22,6 +22,8 @@ meta:
 	ADDON_URL = https://github.com/funatsufumiya/ofxAbseil
 
 common:
+	ADDON_INCLUDES = libs/include
+
 	# dependencies with other addons, a list of them separated by spaces 
 	# or use += in several lines
 	# ADDON_DEPENDENCIES =
