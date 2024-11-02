@@ -65,9 +65,10 @@ void ofApp::setup(){
 
 ## LICENSE
 
-Apache License 2.0
+- abseil: [Apache License 2.0](https://github.com/abseil/abseil-cpp/blob/master/LICENSE)
+- googletest: [BSD-3-Clause license](https://github.com/google/googletest/blob/main/LICENSE)
 
-(Please check abseil [LICENSE](https://github.com/abseil/abseil-cpp/blob/master/LICENSE) for detail.)
+NOTE: No specific copyright is claimed for this repository changes (for oF binding), but the Apache License 2.0 or MIT License can be applied if necessary.
 
 ## Side notes
 
