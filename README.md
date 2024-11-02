@@ -4,7 +4,7 @@
 
 ## Notes
 
-- Some Windows workaround fixes (e.g. ::min(), ::max() problem, disable RawLog, etc) are applied.
+- Some Windows workaround fixes (e.g. fix min/max problem, disable RawLog, etc) are applied.
 - `*_test.cc`, `*_benchmark.cc`, and related files are not included in this addon.
 - Already includes `gmock` and `gtest` from [googletest](https://github.com/google/googletest/) as dependencies.
 
