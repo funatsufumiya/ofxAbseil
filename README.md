@@ -5,6 +5,7 @@
 ## Notes
 
 - Some Windows workaround fixes (e.g. ::min(), ::max() problem, disable RawLog, etc) are applied.
+- `*_test.cc`, `*_benchmark.cc`, and related files are not included in this addon.
 
 ## Usage
 
@@ -62,12 +63,12 @@ void ofApp::setup(){
 // [notice ] ofApp: absl::flat_hash_map<std::string, absl::any>: map["string"] = hello
 ```
 
-## Build notes
-
-- `*_test.cc`, `*_benchmark.cc`, and related files are not included in this addon.
-
 ## LICENSE
 
 Apache License 2.0
 
 (Please check abseil [LICENSE](https://github.com/abseil/abseil-cpp/blob/master/LICENSE) for detail.)
+
+## Side notes
+
+- If you would like to use `std::ranges` alternative (not included in abseil), use [ofxRangeV3](https://github.com/funatsufumiya/ofxRangeV3)
