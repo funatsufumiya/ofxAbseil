@@ -25,7 +25,7 @@
 #include "absl/base/config.h"
 #include "absl/base/log_severity.h"
 #include "absl/strings/string_view.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN

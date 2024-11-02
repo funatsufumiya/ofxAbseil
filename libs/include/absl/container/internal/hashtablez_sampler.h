@@ -53,7 +53,7 @@
 #include "absl/base/thread_annotations.h"
 #include "absl/profiling/internal/sample_recorder.h"
 #include "absl/synchronization/mutex.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 #include "absl/utility/utility.h"
 
 namespace absl {

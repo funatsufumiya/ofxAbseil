@@ -74,7 +74,7 @@
 #include "absl/base/thread_annotations.h"
 #include "absl/synchronization/internal/kernel_timeout.h"
 #include "absl/synchronization/internal/per_thread_sem.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN

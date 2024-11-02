@@ -26,7 +26,7 @@
 
 #include "absl/base/config.h"
 #include "absl/base/macros.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN

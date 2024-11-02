@@ -4,9 +4,6 @@
 
 ## Notes
 
-- Some common name header `time.h` and `utf8.h` are renamed to `absl_time.h` and `absl_utf8.h` to avoid conflict with system headers.
-  - (If more conflicts are found, please make PR.)
-
 - Some Windows workaround fixes (e.g. ::min(), ::max() problem, disable RawLog, etc) are applied.
 
 ## Usage

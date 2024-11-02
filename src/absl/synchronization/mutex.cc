@@ -58,7 +58,7 @@
 #include "absl/debugging/symbolize.h"
 #include "absl/synchronization/internal/graphcycles.h"
 #include "absl/synchronization/internal/per_thread_sem.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 
 using absl::base_internal::CurrentThreadIdentityIfPresent;
 using absl::base_internal::CycleClock;

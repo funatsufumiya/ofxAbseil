@@ -14,7 +14,7 @@
 
 // UTF8 utilities, implemented to reduce dependencies.
 
-#include "absl/strings/internal/absl_utf8.h"
+#include "absl/strings/internal/utf8.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN

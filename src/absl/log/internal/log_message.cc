@@ -53,7 +53,7 @@
 #include "absl/memory/memory.h"
 #include "absl/strings/string_view.h"
 #include "absl/time/clock.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 #include "absl/types/span.h"
 
 extern "C" ABSL_ATTRIBUTE_WEAK void ABSL_INTERNAL_C_SYMBOL(

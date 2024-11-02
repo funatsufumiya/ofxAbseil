@@ -26,7 +26,7 @@
 #include "absl/container/btree_set.h"
 #include "absl/container/flat_hash_set.h"
 #include "absl/strings/cord.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN

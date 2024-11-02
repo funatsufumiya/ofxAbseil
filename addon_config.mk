@@ -23,6 +23,8 @@ meta:
 
 common:
 	ADDON_INCLUDES = libs/include
+	ADDON_SOURCES_EXCLUDE += libs/include/absl/strings/internal/utf8.h
+	ADDON_SOURCES_EXCLUDE += libs/include/absl/time/time.h
 
 	# dependencies with other addons, a list of them separated by spaces 
 	# or use += in several lines
@@ -62,41 +64,3 @@ common:
 	# when parsing the file system looking for libraries exclude this for all or
 	# a specific platform
 	# ADDON_LIBS_EXCLUDE =
-	
-linux64:
-	ADDON_INCLUDES = libs/include
-	
-linux:
-	ADDON_INCLUDES = libs/include
-
-linuxarmv6l:
-	#ADDON_CFLAGS += -DOFXIMGUI_DEBUG
-	#ADDON_CFLAGS += -DIMGUI_IMPL_OPENGL_ES2
-	#ADDON_CFLAGS += -DIMGUI_IMPL_OPENGL_ES3
-	#ADDON_CFLAGS += -DUSE_PI_LEGACY
-	#ADDON_LDFLAGS += -lGL
-
-	
-linuxarmv7l:
-	#ADDON_CFLAGS += -DOFXIMGUI_DEBUG
-	#ADDON_CFLAGS += -DIMGUI_IMPL_OPENGL_ES2
-	#ADDON_CFLAGS += -DIMGUI_IMPL_OPENGL_ES3
-	#ADDON_CFLAGS += -DUSE_PI_LEGACY
-
-msys2:
-
-android/armeabi:	
-	
-android/armeabi-v7a:	
-
-ios:
-	# osx/iOS only, any framework that should be included in the project
-	#ADDON_CFLAGS += -DIMGUI_IMPL_OPENGL_ES2
-#	ADDON_SOURCES_EXCLUDE += libs/imgui/backends/imgui_impl_opengl2.cpp
-#	ADDON_SOURCES_EXCLUDE += libs/imgui/backends/imgui_impl_opengl2.h
-#	ADDON_SOURCES_EXCLUDE += libs/imgui/backends/imgui_impl_opengl3.cpp
-#	ADDON_SOURCES_EXCLUDE += libs/imgui/backends/imgui_impl_opengl3.h
-	# ADDON_SOURCES_EXCLUDE += libs/imgui/backends/imgui_impl_glfw.cpp
-	# ADDON_SOURCES_EXCLUDE += libs/imgui/backends/imgui_impl_glfw.h
-	# ADDON_SOURCES_EXCLUDE += src/EngineGLFW.cpp
-	# ADDON_SOURCES_EXCLUDE += src/EngineGLFW.h

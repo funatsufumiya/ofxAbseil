@@ -31,7 +31,7 @@
 #include "absl/strings/charset.h"
 #include "absl/strings/internal/escaping.h"
 #include "absl/strings/internal/resize_uninitialized.h"
-#include "absl/strings/internal/absl_utf8.h"
+#include "absl/strings/internal/utf8.h"
 #include "absl/strings/numbers.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/string_view.h"

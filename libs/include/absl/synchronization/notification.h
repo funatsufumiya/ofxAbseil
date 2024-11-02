@@ -54,7 +54,7 @@
 
 #include "absl/base/attributes.h"
 #include "absl/synchronization/mutex.h"
-#include "absl/time/absl_time.h"
+#include "absl/time/time.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN
